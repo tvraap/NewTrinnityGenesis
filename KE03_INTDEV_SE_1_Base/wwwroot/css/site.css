@@ -38,6 +38,7 @@ html, body {
         background-color: darkgreen;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.0);
     }
+
 .buy-btn {
     background-color: blue;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
@@ -50,6 +51,7 @@ html, body {
         background-color: darkgreen;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.0);
     }
+
 .store-container {
     display: grid;
     grid-template-columns: 220px 1fr;
@@ -84,7 +86,6 @@ html, body {
     transition: 0.2s;
     display: flex;
     flex-direction: column;
-    padding: 12px;
 }
 
     .product-card:hover {
@@ -100,10 +101,12 @@ html, body {
 .product-info {
     padding: 10px;
 }
+
 .bottom-product {
     margin-top: auto;
     padding-top: 10px;
-    display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
+
+

@@ -26,7 +26,6 @@
     <!-- RIGHT -->
     <div class="main-content">
 
-
         <div class="products-grid">
             @foreach (var product in Model.Products)
             {
@@ -35,21 +34,9 @@
 
                     <div class="bottom-product">
                         <h3>€@product.Price</h3>
-                        <button class="buy-btn">Buy</button>
+                        <button class="buy-btn" onclick="AddToWinkelwagen('@product.Name', '@product.Price')">Buy</button>
                     </div>
                 </div>
-                @* <strong>Parts:</strong>
-                <ul>
-                @foreach (var p in product.Parts)
-                {
-                    <tr>
-                        <td>@p.Name</td>
-
-                    </tr>
-                }
-                </ul> *@
-               
-
             }
         </div>
     </div>
