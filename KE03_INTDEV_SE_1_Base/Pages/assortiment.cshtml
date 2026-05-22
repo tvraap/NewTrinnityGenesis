@@ -1,0 +1,56 @@
+﻿@page
+
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Assortiment";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="header">
+    <div class="cart-badge" id="cartBadge">0</div>
+</div>
+
+<div class="store-container">
+
+    <!-- LEFT -->
+    <div class="sidebar">
+        <h3>Categorieen</h3>
+
+        <button class="category-btn">All</button>
+        <button class="category-btn">Screws</button>
+        <button class="category-btn">Bolts</button>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="main-content">
+
+
+        <div class="products-grid">
+            @foreach (var product in Model.Products)
+            {
+                <div class="product-card">
+                    <h2>@product.Name</h2>
+
+                    <div class="bottom-product">
+                        <h3>€@product.Price</h3>
+                        <button class="buy-btn">Buy</button>
+                    </div>
+                </div>
+                @* <strong>Parts:</strong>
+                <ul>
+                @foreach (var p in product.Parts)
+                {
+                    <tr>
+                        <td>@p.Name</td>
+
+                    </tr>
+                }
+                </ul> *@
+               
+
+            }
+        </div>
+    </div>
+</div>
