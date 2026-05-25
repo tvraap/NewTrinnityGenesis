@@ -20,7 +20,7 @@ function UpdateCartBadge() {
     document.getElementById("cartBadge").innerText = totalItems;
 }
 
-function AddToWinkelwagen(name, price) {
+function AddToWinkelwagen(name, price, Productid) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     price = price.toString();
@@ -33,6 +33,7 @@ function AddToWinkelwagen(name, price) {
     else {
         cart.push({
             Name: name,
+            ProductId: Productid,
             Price: price,
             Quantity: 1
         });
@@ -128,3 +129,22 @@ window.onload = function () {
     UpdateCartBadge();
     displayCart();
 };
+
+
+function submitOrder() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    document.getElementById("cartData").value = JSON.stringify(cart);
+    document.getElementById("checkoutForm").submit();
+
+
+}
+function clearCart() {
+    if (confirm("Clear your cart?")) {
+        localStorage.removeItem("cart");
+        location.reload();
+    }
+}

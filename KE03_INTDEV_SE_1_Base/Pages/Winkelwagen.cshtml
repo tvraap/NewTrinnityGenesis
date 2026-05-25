@@ -14,4 +14,11 @@
         <th>Total Price</th>
         <th>Action</th>
     </tr>
+    <form method="post" id="checkoutForm" asp-page-handler="Checkout">
+        @Html.AntiForgeryToken()
+        <input type="hidden" id="cartData" name="cart" />
+        <button type="button" onclick="submitOrder()" class="btn btn-success">Checkout</button>
+        <button type="button" onclick="clearCart()" class="btn btn-danger">Clear Cart</button>
+    </form>
+
 </table>

@@ -25,10 +25,20 @@ namespace DataAccessLayer
             //    .HasOne(o => o.Customer)
             //    .WithMany(c => c.Orders)
             //    .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Order)
+                .WithMany(o => o.OrderItems)
+                .HasForeignKey(oi => oi.OrderId);
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Product)
+                .WithMany(p => p.OrderItems)
+                .HasForeignKey(oi => oi.ProductId);
 
-            modelBuilder.Entity<Product>()
-                .HasMany(p => p.Orders)
-                .WithMany(o => o.Products);
+            //modelBuilder.Entity<Product>()
+            //    .HasMany(p => p.Orders)
+            //    .WithMany(o => o.Products);
+
+
 
             modelBuilder.Entity<Part>()
                 .HasMany(p => p.Products)

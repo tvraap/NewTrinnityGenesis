@@ -22,6 +22,15 @@ namespace KE03_INTDEV_SE_1_Base
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IPartRepository, PartRepository>();
 
+            // Configure session support
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             // Add services to the container.
             builder.Services.AddRazorPages();
 
@@ -40,7 +49,17 @@ namespace KE03_INTDEV_SE_1_Base
                 var services = scope.ServiceProvider;
 
                 var context = services.GetRequiredService<MatrixIncDbContext>();
-                context.Database.EnsureCreated();
+                // In development recreate the database so model/schema mismatches are resolved
+                if (app.Environment.IsDevelopment())
+                {
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
+                }
+                else
+                {
+                    context.Database.EnsureCreated();
+                }
+
                 MatrixIncDbInitializer.Initialize(context);
             }
 
@@ -48,6 +67,9 @@ namespace KE03_INTDEV_SE_1_Base
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            // Enable session middleware
+            app.UseSession();
 
             app.UseAuthorization();
 

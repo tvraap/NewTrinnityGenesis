@@ -23,7 +23,6 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         }
         public void OnGet()
         {
-            Customers = _customerRepository.GetAllCustomers().ToList();
             Products = _productRepository.GetAllProducts().ToList();
             _logger.LogInformation($"getting all {Customers.Count} customers and {Products.Count} products");
         }
