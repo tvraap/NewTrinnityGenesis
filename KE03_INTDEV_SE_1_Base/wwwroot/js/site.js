@@ -141,6 +141,7 @@ function submitOrder() {
     document.getElementById("checkoutForm").submit();
 
 
+
 }
 function clearCart() {
     if (confirm("Clear your cart?")) {
