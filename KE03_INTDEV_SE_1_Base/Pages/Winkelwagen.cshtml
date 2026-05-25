@@ -5,20 +5,68 @@
     ViewData["Title"] = "Winkel wagen";
 }
 <h1>@ViewData["Title"]</h1>
+<main class="Checkout-container">
+    <section class=" Cart-container">
 
-<table class="table" id="table">
-    <tr>
-        <th>Item</th>
-        <th>Total Items</th>
-        <th>Price per item</th>
-        <th>Total Price</th>
-        <th>Action</th>
-    </tr>
-    <form method="post" id="checkoutForm" asp-page-handler="Checkout">
-        @Html.AntiForgeryToken()
-        <input type="hidden" id="cartData" name="cart" />
-        <button type="button" onclick="submitOrder()" class="btn btn-success">Checkout</button>
-        <button type="button" onclick="clearCart()" class="btn btn-danger">Clear Cart</button>
-    </form>
+        <table class="table" id="table">
+            <tr>
+                <th>Item</th>
+                <th>Total Items</th>
+                <th>Price per item</th>
+                <th>Total Price</th>
+                <th>Action</th>
+            </tr>
+            <form method="post" id="checkoutForm" asp-page-handler="Checkout">
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="cartData" name="cart" />
+                <button type="button" onclick="submitOrder()" class="btn btn-success">Checkout</button>
+                <button type="button" onclick="clearCart()" class="btn btn-danger">Clear Cart</button>
+            </form>
+        </table>
+        </section>
+        <!--van tony overgenomen-->
+        <section class="orders-container">
 
-</table>
+            <h2>Previous Orders</h2>
+
+            @if (!Model.Orders.Any())
+            {
+                <p>No orders yet.</p>
+            }
+            else
+            {
+                @foreach (var order in Model.Orders)
+                {
+                    <div class="order-card">
+
+                        <h3>Order #@order.Id</h3>
+
+                        <p>
+                            <strong>Date:</strong>
+                            @order.OrderDate.ToString("dd-MM-yyyy HH:mm")
+                        </p>
+
+                        <p>
+                            <strong>Customer ID:</strong>
+                            @order.CustomerId
+                        </p>
+
+                        <h4>Products:</h4>
+
+                        <ul>
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <li>
+                                    @item.Product.Name - €@item.Price x @item.Quantity
+                                </li>
+                            }
+                        </ul>
+
+                    </div>
+                    
+                }
+           
+            }
+    </section>
+
+    </main>

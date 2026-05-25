@@ -14,18 +14,3 @@
     </ul>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Klant</th>
-            <th>Aantal Orders</th>
-        </tr>
-    </thead>
-    @foreach (var c in Model.Customers)
-    {
-        <tr>
-            <td>@Html.DisplayName(c.Name)</td>
-            <td>@Html.DisplayName(c.Orders.Count.ToString())</td>
-        </tr>
-    }
-</table>

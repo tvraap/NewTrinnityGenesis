@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,17 +14,27 @@ namespace KE03_INTDEV_SE_1_Base.Pages
     {
 
         private readonly MatrixIncDbContext _context;
+        private readonly ILogger<IndexModel> _logger;
+        private readonly IOrderRepository _orderRepository;
 
-        public WinkelwagenModel(MatrixIncDbContext context)
+        public IList<Order> Orders { get; set; }
+
+        public WinkelwagenModel(MatrixIncDbContext context,ILogger<IndexModel> logger, IOrderRepository orderRepository)
         {
             _context = context;
+            _logger = logger;
+            _orderRepository = orderRepository;
+            Orders = new List<Order>();
+
         }
+
 
         public void OnGet()
         {
+            
+                Orders = _orderRepository.GetAllOrders().ToList();
 
-
-        }
+            }
         private class CartItem
         {
             public string Name { get; set; } = string.Empty;
@@ -91,8 +102,12 @@ namespace KE03_INTDEV_SE_1_Base.Pages
                 throw;
             }
             HttpContext.Session.Remove("cart");
-            return RedirectToPage();
+           
+            return RedirectToPage(new { cleared = true });
         }
 
+       
+
+        
     }
 }
